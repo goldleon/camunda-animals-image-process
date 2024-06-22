@@ -1,0 +1,41 @@
+spring:
+  codec:
+    max-in-memory-size: 10MB
+  application:
+    name: camunda-animal-picture-app
+  data:
+    mongodb:
+      uri: ${MONGODB_URI}
+server:
+  port: ${PORT}
+
+logging:
+  charset:
+    console: UTF-8
+  level:
+    org:
+      springframework: ERROR
+      mongodb: ERROR
+    io:
+      camunda: ERROR
+    reactor:
+      netty:
+        http:
+          client: ERROR
+zeebe:
+  client:
+    cloud:
+      clusterId: ${CAMUNDA_SAAS_CLUSTER_ID}
+      clientId: ${CAMUNDA_SAAS_CLIENT_ID}
+      clientSecret: ${CAMUNDA_SAAS_CLIENT_SECRET}
+      region: ${CAMUNDA_SAAS_REGION}
+
+bpmn:
+  resourcePath: bpmn/animal-picture-process.bpmn
+  resourceName: animal-picture-process-01.bpmn
+
+api:
+  rest:
+    dog: https://place.dog/200/300
+    bear: https://placebear.com/200/300
+    cat: https://api.thecatapi.com/v1/images/search?limit=1

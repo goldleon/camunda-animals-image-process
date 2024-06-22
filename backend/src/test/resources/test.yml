@@ -1,0 +1,14 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/camunda
+
+bpmn:
+  resourcePath: bpmn/animal-picture-process.bpmn
+  resourceName: animal-picture-process-01.bpmn
+
+api:
+  rest:
+    dog: https://place.dog/200/300
+    bear: https://placebear.com/200/300
+    cat: https://api.thecatapi.com/v1/images/search?limit=1

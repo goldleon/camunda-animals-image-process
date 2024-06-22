@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="c78213e" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.5.0" camunda:diagramRelationId="cf8f3afb-a108-47b8-87dc-efa33f54c00b">
+  <bpmn:process id="animal-picture-process" name="Animal Picture Process" isExecutable="true">
+    <bpmn:extensionElements>
+      <zeebe:userTaskForm id="UserTaskForm_05j9u2t">{
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.5.0",
+  "exporter": {
+    "name": "Camunda Web Modeler",
+    "version": "f22cba6"
+  },
+  "schemaVersion": 16,
+  "id": "Select_Animal_0xau714",
+  "components": [
+    {
+      "text": "##### Select Animal to View",
+      "type": "text",
+      "id": "Subheading_0",
+      "layout": {
+        "row": "row_0",
+        "columns": null
+      }
+    },
+    {
+      "values": [
+        {
+          "label": "Dog",
+          "value": "dog"
+        },
+        {
+          "label": "Cat",
+          "value": "cat"
+        },
+        {
+          "label": "Bear",
+          "value": "bear"
+        }
+      ],
+      "label": "Options",
+      "type": "radio",
+      "layout": {
+        "row": "Row_0k6j2sa",
+        "columns": null
+      },
+      "id": "Field_1afrj44",
+      "key": "animal",
+      "validate": {
+        "required": true
+      }
+    }
+  ],
+  "generated": true,
+  "type": "default"
+}</zeebe:userTaskForm>
+    </bpmn:extensionElements>
+    <bpmn:startEvent id="StartEvent_1" name="Animal Type Received">
+      <bpmn:extensionElements />
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="StartEvent_1" targetRef="Task_SelectAnimal" />
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="Task_SelectAnimal" targetRef="Gateway_AnimalType" />
+    <bpmn:exclusiveGateway id="Gateway_AnimalType" name="Animal Type?">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:outgoing>Flow_04vsvv3</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0tejgku</bpmn:outgoing>
+      <bpmn:outgoing>Flow_06gb87v</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="Task_FetchDogPicture" name="Fetch Dog Picture" camunda:type="external" camunda:topic="fetchDogPicture">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="fetchDogPicture" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_04vsvv3</bpmn:incoming>
+      <bpmn:outgoing>Flow_16k3913</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="Dog_End" name="Animal Picture Retrieved">
+      <bpmn:incoming>Flow_0fbqyy7</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Task_FetchBearPicture" name="Fetch Bear Picture" camunda:type="external" camunda:topic="fetchBearPicture">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="fetchBearPicture" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_06gb87v</bpmn:incoming>
+      <bpmn:outgoing>Flow_10ykzhx</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_04vsvv3" name="Dog" sourceRef="Gateway_AnimalType" targetRef="Task_FetchDogPicture">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=animal="dog"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:userTask id="Task_SelectAnimal" name="Select Animal">
+      <bpmn:extensionElements>
+        <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_05j9u2t" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0tejgku" name="Cat" sourceRef="Gateway_AnimalType" targetRef="Activity_13tpos2">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=animal="cat"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:serviceTask id="Activity_13tpos2" name="fetch Cat Picture">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="fetchCatPicture" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0tejgku</bpmn:incoming>
+      <bpmn:outgoing>Flow_0j5fa8w</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="Gateway_0gtoxmt">
+      <bpmn:incoming>Flow_0j5fa8w</bpmn:incoming>
+      <bpmn:incoming>Flow_10ykzhx</bpmn:incoming>
+      <bpmn:incoming>Flow_16k3913</bpmn:incoming>
+      <bpmn:outgoing>Flow_0fbqyy7</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_0j5fa8w" sourceRef="Activity_13tpos2" targetRef="Gateway_0gtoxmt" />
+    <bpmn:sequenceFlow id="Flow_10ykzhx" sourceRef="Task_FetchBearPicture" targetRef="Gateway_0gtoxmt" />
+    <bpmn:sequenceFlow id="Flow_16k3913" sourceRef="Task_FetchDogPicture" targetRef="Gateway_0gtoxmt" />
+    <bpmn:sequenceFlow id="Flow_0fbqyy7" sourceRef="Gateway_0gtoxmt" targetRef="Dog_End" />
+    <bpmn:sequenceFlow id="Flow_06gb87v" name="Bear" sourceRef="Gateway_AnimalType" targetRef="Task_FetchBearPicture">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=animal="bear"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="animal-picture-process">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="152" y="222" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="140" y="258" width="61" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_AnimalType_di" bpmnElement="Gateway_AnimalType" isMarkerVisible="true">
+        <dc:Bounds x="580" y="215" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="525.5" y="203" width="67" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_Dog_di" bpmnElement="Task_FetchDogPicture">
+        <dc:Bounds x="880" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_Dog_di" bpmnElement="Dog_End">
+        <dc:Bounds x="1432" y="222" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1415" y="258" width="71" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_Bear_di" bpmnElement="Task_FetchBearPicture">
+        <dc:Bounds x="880" y="200" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_1_di" bpmnElement="Task_SelectAnimal">
+        <dc:Bounds x="330" y="200" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0dje9gu_di" bpmnElement="Activity_13tpos2">
+        <dc:Bounds x="880" y="320" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0gtoxmt_di" bpmnElement="Gateway_0gtoxmt" isMarkerVisible="true">
+        <dc:Bounds x="1225" y="215" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="188" y="240" />
+        <di:waypoint x="330" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="430" y="240" />
+        <di:waypoint x="580" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_04vsvv3_di" bpmnElement="Flow_04vsvv3">
+        <di:waypoint x="605" y="215" />
+        <di:waypoint x="605" y="120" />
+        <di:waypoint x="880" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="639" y="102" width="21" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0tejgku_di" bpmnElement="Flow_0tejgku">
+        <di:waypoint x="605" y="265" />
+        <di:waypoint x="605" y="360" />
+        <di:waypoint x="880" y="360" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="641" y="343" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0j5fa8w_di" bpmnElement="Flow_0j5fa8w">
+        <di:waypoint x="980" y="360" />
+        <di:waypoint x="1250" y="360" />
+        <di:waypoint x="1250" y="265" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_10ykzhx_di" bpmnElement="Flow_10ykzhx">
+        <di:waypoint x="980" y="240" />
+        <di:waypoint x="1225" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_16k3913_di" bpmnElement="Flow_16k3913">
+        <di:waypoint x="980" y="120" />
+        <di:waypoint x="1250" y="120" />
+        <di:waypoint x="1250" y="215" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0fbqyy7_di" bpmnElement="Flow_0fbqyy7">
+        <di:waypoint x="1275" y="240" />
+        <di:waypoint x="1432" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_06gb87v_di" bpmnElement="Flow_06gb87v">
+        <di:waypoint x="630" y="240" />
+        <di:waypoint x="880" y="240" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="638" y="222" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
