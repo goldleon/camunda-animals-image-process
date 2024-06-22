@@ -1,0 +1,13 @@
+services:
+  app:
+    image: camunda-animal-picture-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080"
+    environment:
+      - SPRING_APPLICATION_VERSION=camunda-animal-picture-app-0.0.1-SNAPSHOT
+      - MONGODB_URI=mongodb+srv://camunda:8yQJexfvThQztu3B@scrapercluster.pb1vkyr.mongodb.net/animal-api?retryWrites=true&w=majority&appName=ScraperCluster
+      #- CAMUNDA_REST_URL=http://localhost:8080/engine-rest
+      - PORT=8080
