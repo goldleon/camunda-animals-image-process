@@ -6,9 +6,9 @@ metadata:
     io.kompose.service: app-configmap
   name: app-configmap
 data:
-  CAMUNDA_SAAS_CLUSTER_ID: "ea45f90b-57bc-464a-a7ab-5b4d7c45db76"
-  CAMUNDA_SAAS_CLIENT_ID: ".mqMXIWiieMcrTGKsBxPWfAB.payFq9j"
-  CAMUNDA_SAAS_CLIENT_SECRET: "K-kvOLvt4E58doinImv20-Kq_ItYbYDSYNVPrI4EsB1XYs.tFJ4EHJhXZK_t12X1"
-  CAMUNDA_SAAS_REGION: "bru-2"
-  PORT: "8080"
-  MONGODB_URI: "mongodb://db:27017/camunda-api"
+  CAMUNDA_SAAS_CLUSTER_ID: <your-client-id>
+  CAMUNDA_SAAS_CLIENT_SECRET: <your-client-secret>
+  CAMUNDA_SAAS_CLIENT_ID: <your-cluster-id>
+  CAMUNDA_SAAS_REGION: <your-region>
+  PORT: <backend-port>
+  MONGODB_URI: <mongodb-uri

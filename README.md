@@ -35,7 +35,7 @@ This starts the Spring Boot client (port 8080) and the MongoDB instance to store
 
 Before you start the application, you need to set up the environment variables.
 These contain the connection info to your Camunda SaaS Cluster.
-This can be done by replacing the placeholders in the [configmap file](./helm/templates/home-rido-test-camunda-animal-picture-app--env-configmap.yaml) with your values.
+This can be done by replacing the placeholders in the [configmap file](./helm/templates/configmap.yaml) with your values.
 
 #### Deploying the Application
 
@@ -43,4 +43,67 @@ This can be done by replacing the placeholders in the [configmap file](./helm/te
 helm install camunda-animal-picture-app ./helm
 ```
 
-This will deploy the application to your Kubernetes cluster.
+This will deploy the application to your Kubernetes cluster.  
+Again you can access the Spring Boot client (port 8080).
+
+You will need to find out the IP addresses of the pods to access the services.
+
+you can port-forward the services to your local machine:
+
+```
+kubectl port-forward <backend-pod> 8080:8080
+```
+
+## Usage
+
+### REST API
+
+Deploy the BPMN process using the API:
+Note: to use the deploy API you need to specifie the following informations inside the [application.yaml](./backend/src/main/resources/application.yml)
+
+```example application.yml
+bpmn:
+  resourcePath: bpmn/animal-picture-process.bpmn
+  resourceName: animal-picture-process-01.bpmn
+```
+
+```
+POST localhost:8080/api/deploy
+```
+
+Bash:
+
+```
+curl -X POST localhost:8080/api/process/start
+```
+
+Starting a new process (returns processInstanceKey):
+
+```
+POST localhost:8080/api/process/start
+```
+
+Bash:
+
+```
+curl -X POST localhost:8080/api/process/start
+```
+
+After completing the User Task, the Job Worker will start retrieving the picture from the API and store it in the DB.
+
+To retrieve the picture (e.g. in your browser):
+
+```
+GET localhost:8080/api/pictures/{processInstanceKey}
+```
+
+# Simplified Architecture
+
+![Architecture](./Simple_Architecture.png)
+
+# Limitations
+
+## Camunda Saas
+
+For now the application can only be configured to work with the Saas offering from Camunda.  
+If you want the app to work with your self-managed instance, you would need to adjust the [application.yaml](./backend/src/main/resources/application.yml) file accordingly.

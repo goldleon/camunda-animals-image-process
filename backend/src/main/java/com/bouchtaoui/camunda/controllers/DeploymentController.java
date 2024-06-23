@@ -15,8 +15,8 @@ import com.bouchtaoui.camunda.service.DeploymentService;
 
 import reactor.core.publisher.Mono;
 
-// @RestController
-// @RequestMapping("/api/deploy")
+@RestController
+@RequestMapping("/api/deploy")
 public class DeploymentController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DeploymentController.class);
