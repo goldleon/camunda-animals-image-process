@@ -3,10 +3,6 @@ spring:
     mongodb:
       uri: mongodb://localhost:27017/camunda
 
-bpmn:
-  resourcePath: bpmn/animal-picture-process.bpmn
-  resourceName: animal-picture-process-01.bpmn
-
 api:
   rest:
     dog: https://place.dog/200/300

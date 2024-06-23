@@ -89,6 +89,13 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- Mockito Core -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>4.0.0</version>
+            <scope>test</scope>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/de.flapdoodle.embed/de.flapdoodle.embed.mongo -->
         <dependency>
             <groupId>de.flapdoodle.embed</groupId>
@@ -104,6 +111,13 @@
         <dependency>
             <groupId>io.camunda</groupId>
             <artifactId>spring-zeebe-test</artifactId>
+            <version>${spring-zeebe.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Spring Boot Starter for Zeebe Test -->
+        <dependency>
+            <groupId>io.camunda.spring</groupId>
+            <artifactId>spring-boot-starter-camunda-test</artifactId>
             <version>${spring-zeebe.version}</version>
             <scope>test</scope>
         </dependency>
@@ -126,6 +140,11 @@
                     <arg>-parameters</arg>
                 </compilerArgs>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
             </plugin>
         </plugins>
     </build>

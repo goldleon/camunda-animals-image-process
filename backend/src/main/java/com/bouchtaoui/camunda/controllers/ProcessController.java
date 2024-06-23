@@ -21,8 +21,8 @@ public class ProcessController {
     private ProcessService processService;
 
     @PostMapping("/start")
-    public Mono<ResponseEntity<ProcessInstanceResponse>> startProcess(@RequestParam String animal) {
-        return processService.startProcess(animal)
+    public Mono<ResponseEntity<ProcessInstanceResponse>> startProcess() {
+        return processService.startProcess()
                 .map(process -> ResponseEntity.status(HttpStatus.CREATED).body(process))
                 .defaultIfEmpty(ResponseEntity.internalServerError().build());
     }

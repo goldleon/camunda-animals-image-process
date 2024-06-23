@@ -17,15 +17,13 @@ public class ProcessService {
     @Autowired
     private ZeebeClient zeebeClient;
 
-    public Mono<ProcessInstanceResponse> startProcess(String animal) {
+    public Mono<ProcessInstanceResponse> startProcess() {
         return Mono.fromCallable(() -> {
-            Map<String, Object> variables = new HashMap<>();
-
-            variables.put("animal", animal);
             var event = zeebeClient.newCreateInstanceCommand()
                     .bpmnProcessId("animal-picture-process")
                     .latestVersion()
-                    .variables(variables).send().join();
+                    .send()
+                    .join();
 
             return new ProcessInstanceResponse(String.valueOf(event.getProcessInstanceKey()));
         });
