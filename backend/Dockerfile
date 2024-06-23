@@ -1,6 +1,8 @@
 # Use an official OpenJDK runtime as a parent image
-FROM openjdk:21-jdk-slim
+FROM eclipse-temurin:21-jdk-alpine
 LABEL authors="Anass BOUCHTAOUI"
+
+RUN apk update && apk upgrade
 
 # Set the working directory in the container
 WORKDIR /app
