@@ -1,7 +1,15 @@
 package com.bouchtaoui.camunda.worker;
 
-import com.bouchtaoui.camunda.service.PictureService;
-import io.camunda.zeebe.client.api.response.ActivatedJob;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
+
+import java.lang.reflect.Method;
+import java.util.Map;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,17 +19,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import reactor.core.publisher.Mono;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.reflect.Method;
-import java.util.Map;
+import com.bouchtaoui.camunda.service.PictureService;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.*;
+import io.camunda.zeebe.client.api.response.ActivatedJob;
+import reactor.core.publisher.Mono;
 
 @ExtendWith(MockitoExtension.class)
 class PictureJobWorkerTest {

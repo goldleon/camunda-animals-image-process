@@ -4,7 +4,7 @@ metadata:
   creationTimestamp: null
   labels:
     io.kompose.service: mongodb-data
-  name: mongodb
+  name: mongodb-data
 spec:
   accessModes:
     - ReadWriteOnce

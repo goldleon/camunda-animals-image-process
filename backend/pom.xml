@@ -9,7 +9,7 @@
     </parent>
     <groupId>com.bouchtaoui</groupId>
     <artifactId>camunda-animal-picture-app</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.1.0-SNAPSHOT</version>
     <name>camunda-animal-picture-app</name>
     <description>camunda</description>
     <url/>
@@ -45,7 +45,7 @@
         <maven.compiler.release>${jdk.version}</maven.compiler.release>
         <maven.build.timestamp.format>dd-MM-yyyy-HH-mm</maven.build.timestamp.format>
 
-        <spring-zeebe.version>8.5.2</spring-zeebe.version>
+        <spring-zeebe.version>8.5.3</spring-zeebe.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

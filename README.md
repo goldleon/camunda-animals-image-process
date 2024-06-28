@@ -18,7 +18,7 @@ CAMUNDA_SAAS_CLIENT_ID=your_client_id
 CAMUNDA_SAAS_CLIENT_SECRET=your_client_secret
 CAMUNDA_SAAS_CLUSTER_ID=your_cluster_id
 PORT=8080
-DATABASE_URL=mongodb-url
+MONGODB_URI=mongodb-url
 ```
 
 #### Running the application

@@ -6,9 +6,9 @@ import org.springframework.test.context.TestPropertySource;
 
 import io.camunda.zeebe.spring.test.ZeebeSpringTest;
 
-@SpringBootTest
 @TestPropertySource(properties = { "spring.config.name=test" })
 @ZeebeSpringTest
+@SpringBootTest
 class CamundaApplicationTests {
 
     @Test

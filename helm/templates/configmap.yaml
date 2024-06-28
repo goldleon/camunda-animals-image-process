@@ -1,14 +1,11 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  creationTimestamp: null
-  labels:
-    io.kompose.service: app-configmap
-  name: app-configmap
+  name: app-env
 data:
-  CAMUNDA_SAAS_CLUSTER_ID: <your-client-id>
-  CAMUNDA_SAAS_CLIENT_SECRET: <your-client-secret>
-  CAMUNDA_SAAS_CLIENT_ID: <your-cluster-id>
-  CAMUNDA_SAAS_REGION: <your-region>
-  PORT: <backend-port>
-  MONGODB_URI: <mongodb-uri
+  CAMUNDA_SAAS_CLUSTER_ID: "1304ac40-b00b-4d21-a691-be5da63d7eed"
+  CAMUNDA_SAAS_CLIENT_SECRET: "PgSLisnJKIwSz36h5-U_OW3Q4R26grW5Maap3-5X_wavphYIAZ0hfQB-UbB3aob~"
+  CAMUNDA_SAAS_CLIENT_ID: "2cWps6sPQQMei.PW4hx5fNv_ixBDMIXE"
+  CAMUNDA_SAAS_REGION: "dsm-1"
+  PORT: "8080"
+  MONGODB_URI: "mongodb://db:27017/camunda-api"

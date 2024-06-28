@@ -11,24 +11,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+
+import com.bouchtaoui.camunda.model.ProcessInstanceResponse;
+import com.bouchtaoui.camunda.service.ProcessService;
+
 import io.camunda.zeebe.client.ZeebeClient;
 import io.camunda.zeebe.client.api.response.ActivatedJob;
 import io.camunda.zeebe.client.api.response.ProcessInstanceEvent;
 import io.camunda.zeebe.process.test.api.ZeebeTestEngine;
-import io.camunda.zeebe.spring.test.ZeebeSpringTest;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
-
-import com.bouchtaoui.camunda.CamundaApplicationTests;
-import com.bouchtaoui.camunda.model.ProcessInstanceResponse;
-import com.bouchtaoui.camunda.service.ProcessService;
 
 class ProcessServiceTest extends CamundaApplicationTests {
 
@@ -133,31 +130,5 @@ class ProcessServiceTest extends CamundaApplicationTests {
         } else {
             zeebe.newCompleteCommand(userTaskJob.getKey()).send().join();
         }
-    }
-
-    private void completeServiceTask(final String jobType) throws InterruptedException, TimeoutException {
-        completeServiceTasks(jobType, 2);
-    }
-
-    private void completeServiceTasks(final String jobType, final int count)
-            throws InterruptedException, TimeoutException {
-
-        final var activateJobsResponse = zeebe.newActivateJobsCommand().jobType(jobType).maxJobsToActivate(count).send()
-                .join();
-
-        final int activatedJobCount = activateJobsResponse.getJobs().size();
-        if (activatedJobCount < count) {
-            Assertions.fail(
-                    "Unable to activate %d jobs, because only %d were activated."
-                            .formatted(count, activatedJobCount));
-        }
-
-        for (int i = 0; i < count; i++) {
-            final var job = activateJobsResponse.getJobs().get(i);
-
-            zeebe.newCompleteCommand(job.getKey()).send().join();
-        }
-
-        zeebeTestEngine.waitForIdleState(Duration.ofSeconds(1));
     }
 }
