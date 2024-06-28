@@ -3,9 +3,9 @@ kind: ConfigMap
 metadata:
   name: app-env
 data:
-  CAMUNDA_SAAS_CLUSTER_ID: "1304ac40-b00b-4d21-a691-be5da63d7eed"
-  CAMUNDA_SAAS_CLIENT_SECRET: "PgSLisnJKIwSz36h5-U_OW3Q4R26grW5Maap3-5X_wavphYIAZ0hfQB-UbB3aob~"
-  CAMUNDA_SAAS_CLIENT_ID: "2cWps6sPQQMei.PW4hx5fNv_ixBDMIXE"
-  CAMUNDA_SAAS_REGION: "dsm-1"
+  CAMUNDA_SAAS_CLUSTER_ID: <cluster-id>
+  CAMUNDA_SAAS_CLIENT_SECRET: <client-secret>
+  CAMUNDA_SAAS_CLIENT_ID: <client-id>
+  CAMUNDA_SAAS_REGION: <cluster-id>
   PORT: "8080"
   MONGODB_URI: "mongodb://mongodb:27017/camunda-api"
