@@ -8,4 +8,4 @@ data:
   CAMUNDA_SAAS_CLIENT_ID: "2cWps6sPQQMei.PW4hx5fNv_ixBDMIXE"
   CAMUNDA_SAAS_REGION: "dsm-1"
   PORT: "8080"
-  MONGODB_URI: "mongodb://db:27017/camunda-api"
+  MONGODB_URI: "mongodb://mongodb:27017/camunda-api"
